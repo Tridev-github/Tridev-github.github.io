@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>My resume</title>
+
   <style>
     .heading{
-      color: blue;
+      color: /*#330066*/ /*#6599FF*/ /*blue*/ /*#003366*/ #003333;
     }
     .align{
       text-align: center;
@@ -18,17 +19,61 @@
     }
 
 
+    .articles{
+      width:70%;
+      height: auto;
+      margin: auto;
+    }
     /*
     hr{
       border: 0;
       height: 3px;
       background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(9, 84, 132), rgba(0, 0, 0, 0));
     }
-
-     */
+  */
+    .button {
+      background-color: /*#4CAF50*/#003333;
+      border: none;
+      color: white;
+      padding: 10px 21px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+    @media print {
+      .button {
+        visibility: hidden;
+      }
+    }
   </style>
 </head>
-<body style="margin-top: 50px;margin-left: 20px;margin-right: 20px">
+<body style="margin-top: 50px;margin-left: 20px;margin-right: 20px" oncontextmenu="return false;">
+<script>
+  document.onkeydown = function(e) {
+    if(event.keyCode === 123) {
+      return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)){
+      return false;
+    }
+    if(e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)){
+      return false;
+    }
+    if(e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)){
+      return false;
+    }
+
+    if(e.ctrlKey && e.shiftKey && e.keyCode === 'C'.charCodeAt(0)){
+      return false;
+    }
+  }
+</script>
+
+<div style="text-align: end">
+  <button class="button" id="Print" onclick="window.print()">Print</button>
+</div>
+<div class="articles">
   <h1 class="heading" style="text-align: center">TRIDEV REDDY METHUKU</h1>
   <h3 class="align">+9110312041|methukutridev@gmail.com</h3>
   <p class="align">
@@ -50,14 +95,18 @@
   <h2 class="heading">PROJECTS</h2><hr>
   <div style="display: flex; justify-content: space-between;">
     <p style="background-color: papayawhip;">Decentralised file storage</p>
+    <p><a style="color: #222222" href="">Github</a></p>
     <p style="background-color: palegoldenrod;">4th semester</p>
   </div>
   <div style="display: flex; justify-content: space-between;">
     <p style="background-color: papayawhip;">Rule based comment evaluation</p>
+    <p><a style="color: #222222" href="">Github</a></p>
     <p style="background-color: palegoldenrod;">5th semester</p>
   </div>
   <h2 class="heading">SKILLS AND LANGUAGES</h2><hr>
   <h2 class="heading">ACCOMPLISHMENTS</h2><hr>
   <h2 class="heading">SOCIAL PROFILES</h2><hr>
+</div>
+
 </body>
 </html>
