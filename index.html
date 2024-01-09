@@ -5,25 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tridev Methuku - Portfolio</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- You can include additional styling or link your own CSS file here -->
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
         }
         header {
             background-color: #343a40;
             color: #ffffff;
-            padding: 30px 0;
+            padding: 50px 0;
             text-align: center;
         }
+        header h1 {
+            margin-bottom: 10px;
+        }
+        header p {
+            margin-bottom: 30px;
+        }
+        .profile-picture img {
+            border-radius: 50%;
+            max-width: 150px;
+            border: 5px solid #ffffff;
+        }
         section {
+            margin-top: 50px;
+        }
+        section h2 {
+            color: #343a40;
+        }
+        section p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .card {
             margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <div class="profile-picture">
+                <img src="https://media.licdn.com/dms/image/D5603AQF5uw8nSWQkzg/profile-displayphoto-shrink_400_400/0/1704799852224?e=1710374400&v=beta&t=L3okuoYGtEVHLhE8FaBfljQxMQSbDDiSEXtKB3iYhDs" alt="Profile Picture">
+            </div>
             <h1>Tridev Methuku</h1>
             <p>(+91) 9110312041 | tridevmethuku@gmail.com</p>
         </header>
@@ -61,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="card mt-3">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Samsung Prism Member at VIT</h5>
                     <p class="card-text">Collaborated with people to solve real-world problems. Identified ghost artifacts in multi-frame HDR processed image with SSD MobileNet model. Compared different models to find an efficient model feasible for mobile phones.</p>
@@ -69,7 +100,36 @@
             </div>
         </section>
 
-        <!-- Include similar sections for Project Experience, Volunteer Experience, etc. -->
+        <section id="projects">
+            <h2>Project Experience</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Decentralized File Storage</h5>
+                    <p class="card-text">Developed a peer-to-peer web application using Django and Python's socket library. Enhanced file security through encryption and hash values. Designed an API to manage file replication. Implementation of distributed hash tables for peer routing algorithms was a significant hurdle.</p>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Synthetic Data Generation of Patient MRIs</h5>
+                    <p class="card-text">Pioneered a novel privacy-preserving medical imaging solution using a GAN to synthetically generate one-to-one patient-specific MRI data. Developed an advanced GAN architecture with a modified U-Net generator and tailored CNN discriminator for realistic and privacy-preserving MRI synthesis.</p>
+                </div>
+            </div>
+
+            <!-- Add more project cards as needed -->
+        </section>
+
+        <section id="volunteer">
+            <h2>Volunteer Experience</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">CodeChef VIT Club Member</h5>
+                    <p class="card-text">Conducted programming and DSA sessions for diverse academic backgrounds. Assisted individuals in overcoming programming challenges and fears. Advocated for fundamental computer science understanding across disciplines.</p>
+                </div>
+            </div>
+
+            <!-- Add more volunteer experience cards as needed -->
+        </section>
 
     </div>
 
