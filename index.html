@@ -1,215 +1,80 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-
-  <title>Tridev's Resume</title>
-
-  <link rel="shortcut icon" href="https://toppng.com/uploads/preview/student-tailored-small-small-icon-for-students-11553530906s3623g6wra.png" type="image/x-icon">
-
-  <style>
-    .heading{
-      color: /*#330066*/ /*#6599FF*/ /*blue*/ /*#003366*/ #003333 /*#004d1b*/ /*#003312*/ /*#000033*/;
-    }
-    .align{
-      text-align: center;
-    }
-
-    hr {
-      width: 100%;
-      height: 1px;
-      background-color: #222222;
-    }
-    /*
-    hr{
-      border: 0;
-      height: 3px;
-      background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(9, 84, 132), rgba(0, 0, 0, 0));
-    }
-    */
-    .articles{
-      width:63%;
-      height: auto;
-      margin: auto;
-    }
-
-    .button {
-      background-color: /*#4CAF50*/#003333;
-      border: none;
-      color: white;
-      padding: 10px 21px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-    }
-    @media print {
-      .button {
-        visibility: hidden;
-      }
-    }
-    @media screen and (max-device-width: 450px){
-      .articles{
-        width: 84%;
-      }
-      
-      
-      h1{
-        font-size: 35px;
-      }
-      h2{
-        font-size: 18px;
-      }
-      h3{
-        font-size: 15px;
-      }
-      li{
-        font-size: 10px;
-      }
-      p{
-        font-size: 20px;
-      }
-      .align{
-        font-size: 10px;
-      }
-      .sub_articles{
-        width: 90%;
-      }
-      
-      
-      
-      /*
-      h1{
-        font-size: 34px;
-      }
-      h2{
-        font-size: 16px;
-      }
-      h3{
-        font-size: 13px;
-      }
-      li{
-        font-size: 7px;
-      }
-      p{
-        font-size: 18px;
-      }
-      .align{
-        font-size: 7px;
-      }
-      */
-      
-      
-       
-    }
-  </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tridev Methuku - Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- You can include additional styling or link your own CSS file here -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        header {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 30px 0;
+            text-align: center;
+        }
+        section {
+            margin-top: 30px;
+        }
+    </style>
 </head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tridev Methuku</h1>
+            <p>(+91) 9110312041 | tridevmethuku@gmail.com</p>
+        </header>
 
-<body style="margin-left: 20px;margin-right: 20px; background-color: #E5E4E2" oncontextmenu="return false;">
-<script>
-  document.onkeydown = function(e) {
-    if(event.keyCode === 123) {
-      return false;
-    }
-    if(e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)){
-      return false;
-    }
-    if(e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)){
-      return false;
-    }
-    if(e.ctrlKey && e.keyCode === 'U'.charCodeAt(0)){
-      return false;
-    }
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a passionate computer science student with a focus on data science. Currently pursuing a Bachelor's degree at Vellore Institute of Technology. I have a strong foundation in data structures, algorithms, and machine learning.</p>
+        </section>
 
-    if(e.ctrlKey && e.shiftKey && e.keyCode === 'C'.charCodeAt(0)){
-      return false;
-    }
-  }
-</script>
+        <section id="education">
+            <h2>Education</h2>
+            <p>Bachelor of Technology, Computer Science and Engineering with specialization in Data Science</p>
+            <p>2020-2024 | Vellore Institute of Technology, Vellore | GPA: 8.7/10</p>
+        </section>
 
-<div style="text-align: end;">
-  <button class="button" id="Print" onclick="window.print()">Print</button>
-</div>
-<div class="articles">
-  <h1 class="heading" style="text-align: center">TRIDEV REDDY METHUKU</h1>
-  <h3 class="align">+9110312041|<a href="mailto:methukutridev@gmail.com" style="color: black;text-decoration: none">methukutridev@gmail.com</a></h3>
-  <p class="align">
-    A passionate programmer with will and perseverance to learn. My areas of interest include problem-solving, machine learning and web development.
-  </p>
-<div class="sub_articles">
-  <h2 class="heading">EDUCATION</h2><hr>
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <ul>
+                <li>Data Structures and Algorithms</li>
+                <li>Machine Learning, Natural Language Processing</li>
+                <li>Programming Languages: C, C++, Python, Java</li>
+                <li>Web Technologies: HTML, CSS, JavaScript, Bootstrap, Tailwind</li>
+                <li>Web Frameworks: Django, Node.js</li>
+                <li>Databases: SQL, PostgreSQL, MongoDB</li>
+            </ul>
+        </section>
 
-  <div style="display: flex; justify-content: space-between;">
-    <p style="background-color: papayawhip;">Vellore Institute of Technology, Vellore</p>
-    <p style="background-color: palegoldenrod;">2020-2024</p>
-  </div>
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Automation Development Intern at Point Zero Solutions</h5>
+                    <p class="card-text">Developed a smart parking solution using visual technology. Employed image analysis for identifying available parking slots. Incorporated object detection to recognize occupied spots. Created a user-friendly interface for real-time parking updates.</p>
+                    <p class="card-text"><small class="text-muted">Dec 2022 - Mar 2023</small></p>
+                </div>
+            </div>
 
-  <ul>
-    <li>B. Tech in Computer Science and Engineering with specialisation in data science.</li>
-    <li>CGPA - 8.68</li>
-  </ul>
- 
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Samsung Prism Member at VIT</h5>
+                    <p class="card-text">Collaborated with people to solve real-world problems. Identified ghost artifacts in multi-frame HDR processed image with SSD MobileNet model. Compared different models to find an efficient model feasible for mobile phones.</p>
+                </div>
+            </div>
+        </section>
 
-  
-  <h2 class="heading">PROJECTS</h2><hr>
-  <div style="display: flex; justify-content: space-between;">
-    <p style="background-color: papayawhip;">Rule based comment evaluation</p>
-    <p><a style="color: #222222" href="https://github.com/Tridev-github/NLP-project">Github</a></p>
-    <p style="background-color: palegoldenrod;">5th semester</p>
-  </div>
-  <ul>
-    <li>Proposed a rule based model to rank user's comments retrieved from YouTube API.</li>
-    <li>So forth achieving the following goals:</li>
-    <ol>
-      <li>Resolved relativity of a comment.</li>
-      <li>Achieved interdependence to user’s experience.</li>
-    </ol>
-  </ul>
-  
-  <div style="display: flex; justify-content: space-between;">
-    <p style="background-color: papayawhip;">Image caption genterator</p>
-    <p><a style="color: #222222" href="https://colab.research.google.com/drive/1VwFAeswCr6J9us89IQGWntXXPbVZFEmG#scrollTo=3at6TeeLyAEk">Colab</a></p>
-    <p style="background-color: palegoldenrod;">5th semester</p>
-  </div>
-  <ul>
-    <li>Trained a model to generate captions for the given image, used CNN and LSTM.</li>
-    <li>The aim of the product:</li>
-    <ol>
-      <li>Making information retrieval efficient for video content on internet.</li>
-      <li>Generating a word list for any video for efficient IR.</li>
-    </ol>
-  </ul>
-  
-  <div style="display: flex; justify-content: space-between;">
-    <p style="background-color: papayawhip;">Decentralised file storage</p>
-    <p><a style="color: #222222" href="https://github.com/Tridev-github/DFS">Github</a></p>
-    <p style="background-color: palegoldenrod;">4th semester</p>
-  </div>
-  <ul>
-    <li>Emulated a decentralised file storage system.</li>
-    <li>Created a p2p web application with django and python's socket library.</li>
-  </ul>
-  <h2 class="heading">SKILLS AND LANGUAGES</h2><hr>
-  <ul>
-    <li>Data structures and Algorithms</li>
-    <li>Machine learning, Natural language processing</li>
-    <li>C, C++, Python, Java</li>
-    <li>Html, Css, Javascript, Bootstrap, Tailwind</li>
-    <li>Django, PHP, Node.js, React.js</li>
-    <li>SQL, PostgreSQL, MongoDB</li>
-    <li>Git</li>
-  </ul>
+        <!-- Include similar sections for Project Experience, Volunteer Experience, etc. -->
 
-  <h2 class="heading">SOCIAL PROFILES</h2><hr>
-  <a href="https://www.linkedin.com/in/tridev-reddy-methuku-590535203/"><img alt="LinkedIn" src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="40px" style="margin-right: 45px"></a>
-  <a href="https://github.com/Tridev-github"><img alt="Github" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="40px" style="margin-right: 45px"></a>
-  <a href="https://leetcode.com/methukutridev/"><img alt="Leetcode" src="https://cdn.iconscout.com/icon/free/png-256/leetcode-3628885-3030025.png" width="40px" style="margin-right: 45px"></a>
-  <a href=https://codeforces.com/profile/TridevReddy><img alt="Codeforces" src="https://cdn.iconscout.com/icon/free/png-256/code-forces-3521352-2944796.png" width="40px" style="margin-right: 45px"></a>
-  <a href="https://www.codechef.com/users/methukutridev"><img alt="Codechef" src="https://avatars1.githubusercontent.com/u/11960354?s=460&v=4" width="40px"></a>
-</div>
-</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
