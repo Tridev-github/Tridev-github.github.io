@@ -3,85 +3,71 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tridev Methuku — Résumé Chat (All-Browser, Turbo)</title>
-  <meta name="theme-color" content="#141414" />
+  <title>Tridev Methuku — Transit-Map Résumé</title>
+  <meta name="theme-color" content="#0e0f12" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="preconnect" href="https://esm.run" crossorigin />
-  <link rel="preconnect" href="https://huggingface.co" crossorigin />
 </head>
 <body>
-  <div class="bg-veil"></div>
-  <header class="hero">
-    <div class="hero-inner">
-      <h1>Tridev Methuku</h1>
-      <p>Chat with my résumé — cinematic UI, 100% in your browser.</p>
-      <div class="chip-row">
-        <span class="chip">No servers</span>
-        <span class="chip">No API keys</span>
-        <span class="chip">WebGPU acceleration</span>
-      </div>
-      <div id="env-warnings"></div>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <strong>Tridev Methuku</strong>
+      <span class="muted">Transit-Map Résumé</span>
+    </div>
+    <div class="actions">
+      <input id="search" placeholder="Search stations (e.g., Samsung, RAG, SUNY)"/>
+      <button id="textView">Text View / Print</button>
     </div>
   </header>
 
   <main class="layout">
-    <section class="panel status card">
-      <h3>System Status</h3>
-      <div class="kv">
-        <div>Embeddings</div><div id="embed-status">Initializing…</div>
-      </div>
-      <div class="kv">
-        <div>LLM</div><div id="llm-status">Checking WebGPU…</div>
-      </div>
-      <div id="progress-wrap" class="progress hidden"><div id="progress-bar"></div></div>
+    <aside class="legend card">
+      <h3>Lines</h3>
+      <label><input type="checkbox" data-line="experience" checked/> <span class="chip chip-exp">Experience</span></label>
+      <label><input type="checkbox" data-line="projects" checked/> <span class="chip chip-proj">Projects</span></label>
+      <label><input type="checkbox" data-line="education" checked/> <span class="chip chip-edu">Education</span></label>
+      <label><input type="checkbox" data-line="publications" checked/> <span class="chip chip-pub">Pubs & Patents</span></label>
+      <label><input type="checkbox" data-line="skills" checked/> <span class="chip chip-skill">Skills</span></label>
+      <label><input type="checkbox" data-line="contact" checked/> <span class="chip chip-contact">Contact</span></label>
+      <p class="muted tip">Click a station to open details. Hover to preview.</p>
+    </aside>
 
-      <div class="controls">
-        <label class="toggle"><input id="toggle-turbo" type="checkbox" checked /> <span>Turbo (prefer tiny model)</span></label>
-        <label class="toggle"><input id="toggle-warm" type="checkbox" checked /> <span>Warm-up compile</span></label>
-        <label class="toggle"><input id="toggle-stream" type="checkbox" /> <span>Stream tokens*</span></label>
-        <div class="hint">*Streaming depends on browser speed; if unstable, turn off.</div>
-        <div class="row">
-          <label for="max-tokens">Max tokens</label>
-          <input id="max-tokens" type="number" min="64" max="512" value="192" />
-        </div>
-      </div>
+    <section class="map card">
+      <!-- Responsive SVG canvas -->
+      <svg id="metro" viewBox="0 0 1200 800" role="img" aria-label="Transit map of Tridev's portfolio"></svg>
+      <div id="tooltip" class="tooltip hidden"></div>
     </section>
 
-    <section class="panel chat card">
-      <div class="chat-window" id="messages"></div>
-      <div class="composer">
-        <input id="prompt" placeholder="Ask about Tridev (e.g., 'Summarize Samsung work')" />
-        <button id="send">Send</button>
-        <button id="reset" class="ghost">Reset</button>
-      </div>
-      <div class="tips">
-        <strong>Try:</strong>
-        <code>What did you do in computer vision?</code>
-        <code>What’s your RAG stack?</code>
-        <code>Top 3 projects in one line each.</code>
-      </div>
-    </section>
-
-    <aside class="panel ctx card">
-      <div class="ctx-header">
-        <h3>Retrieved Context</h3>
-        <button id="collapse-ctx" class="ghost small">Toggle</button>
-      </div>
-      <div id="ctx-view" class="ctx-grid"></div>
+    <aside class="panel card hidden" id="panel" aria-live="polite">
+      <button class="close" id="close">✕</button>
+      <h2 id="p-title">Station</h2>
+      <p class="muted" id="p-sub"></p>
+      <p id="p-body"></p>
+      <ul id="p-bullets"></ul>
+      <div id="p-tags" class="tags"></div>
+      <div id="p-links" class="links"></div>
     </aside>
   </main>
 
+  <!-- Text/Print view (for HR) -->
+  <section id="printable" class="printable hidden">
+    <div class="print-inner">
+      <h1>Tridev Methuku</h1>
+      <p class="muted">Creative résumé — printable summary</p>
+      <div id="print-content"></div>
+      <p class="muted small">This is a print view of the Transit-Map Résumé. Visit the site for the interactive map.</p>
+    </div>
+  </section>
+
   <footer class="foot">
-    <p>Built with <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noreferrer">Transformers.js</a> + <a href="https://webllm.mlc.ai" target="_blank" rel="noreferrer">WebLLM</a>. <span class="dot">•</span> Theme: Netflix-style dark.</p>
+    <span>Made with vanilla HTML/CSS/JS. Everything runs in your browser.</span>
   </footer>
 
+  <script type="module" src="data.js"></script>
   <script type="module" src="app.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(console.error);
-      });
+      navigator.serviceWorker.register('./sw.js').catch(()=>{});
     }
   </script>
 </body>
