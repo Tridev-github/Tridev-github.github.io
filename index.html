@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-contrast="normal">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -36,6 +36,7 @@
 
       <div class="tools">
         <button id="focusBtn" class="ghost" title="Toggle focus mode" aria-pressed="false">Focus</button>
+        <button id="contrastBtn" class="ghost" title="High contrast">Contrast</button>
         <button id="resetBtn" class="ghost" title="Reset view">Reset</button>
         <button id="exportBtn" class="ghost" title="Export PNG">Export</button>
         <button id="themeToggle" class="ghost" title="Toggle theme" aria-label="Toggle theme">🌗</button>
@@ -47,6 +48,14 @@
   <main class="app">
     <section class="canvas-wrap">
       <svg id="skillTree" role="img" aria-label="Interactive skill tree graph"></svg>
+
+      <!-- Legend (for click UX) -->
+      <div class="legend">
+        <span>🖱️ Click a <b>node</b> for details</span>
+        <span>🧭 Click a <b>link</b> to travel</span>
+        <span>📌 Drag to pin • 🖱️+wheel to zoom</span>
+      </div>
+
       <div id="toast" class="toast" role="status" aria-live="polite"></div>
       <noscript><p class="noscript">Enable JavaScript to view the interactive skill tree.</p></noscript>
     </section>
@@ -57,7 +66,7 @@
         <button id="closeDetail" class="ghost" aria-label="Close">✕</button>
       </div>
       <div id="detail-body" class="detail-body">
-        <p>Hover or click a node to see details. Drag a node to **pin** it. Keys: <kbd>→</kbd>/<kbd>←</kbd>, <kbd>P</kbd> pin, <kbd>F</kbd> focus.</p>
+        <p>Click nodes to open details. <strong>Click links</strong> between nodes to move along the path. Drag nodes to <strong>pin</strong> them (green ring).</p>
       </div>
       <div class="detail-footer">
         <a id="emailLink" class="chip" href="mailto:tridevmethuku.0@gmail.com">📧 Email</a>
@@ -70,7 +79,7 @@
   <footer class="footer">
     <span>© <span id="year"></span> Tridev Methuku</span>
     <span class="sep">•</span>
-    <span>Zoom: wheel/trackpad • Pan: drag background</span>
+    <span>Zoom: wheel • Pan: drag background</span>
     <span class="sep">•</span>
     <a href="#" id="a11yToggle">A11y: reduce motion</a>
   </footer>
