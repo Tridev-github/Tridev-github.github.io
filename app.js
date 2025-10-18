@@ -1,224 +1,148 @@
-// All-browser RAG with Netflix-style UI + Turbo options
-import { RESUME_CHUNKS } from './resume.js';
+import { LINES, STATIONS } from './data.js';
 
-const transformers = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.0/dist/transformers.min.js');
-const webllm       = await import('https://esm.run/@mlc-ai/web-llm');
+const svg = document.getElementById('metro');
+const tooltip = document.getElementById('tooltip');
+const panel = document.getElementById('panel');
+const closeBtn = document.getElementById('close');
+const titleEl = document.getElementById('p-title');
+const subEl = document.getElementById('p-sub');
+const bodyEl = document.getElementById('p-body');
+const bulletsEl = document.getElementById('p-bullets');
+const tagsEl = document.getElementById('p-tags');
+const linksEl = document.getElementById('p-links');
+const searchEl = document.getElementById('search');
 
-const $  = (s) => document.querySelector(s);
-const messagesEl   = $('#messages');
-const ctxViewEl    = $('#ctx-view');
-const embedStatus  = $('#embed-status');
-const llmStatus    = $('#llm-status');
-const progressWrap = $('#progress-wrap');
-const progressBar  = $('#progress-bar');
+const textViewBtn = document.getElementById('textView');
+const printable = document.getElementById('printable');
+const printContent = document.getElementById('print-content');
 
-const toggleTurbo  = $('#toggle-turbo');
-const toggleWarm   = $('#toggle-warm');
-const toggleStream = $('#toggle-stream');
-const maxTokensEl  = $('#max-tokens');
+closeBtn.addEventListener('click', () => panel.classList.add('hidden'));
 
-$('#collapse-ctx').addEventListener('click', () => {
-  ctxViewEl.classList.toggle('hidden');
+// ---- Draw rails ----
+function drawLine(line){
+  const path = document.createElementNS('http://www.w3.org/2000/svg','polyline');
+  path.setAttribute('class', `rail ${line.css}`);
+  path.setAttribute('points', line.path.map(p=>p.join(',')).join(' '));
+  path.dataset.line = line.id;
+  svg.appendChild(path);
+}
+
+// ---- Draw stations ----
+function drawStation(st){
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('class', 'station');
+  g.dataset.id = st.id;
+  g.dataset.line = st.line;
+
+  const [x,y] = st.at;
+  const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx', x); c.setAttribute('cy', y);
+  c.setAttribute('r', 8);
+  c.setAttribute('class', `node ${LINES.find(l=>l.id===st.line).css}`);
+  g.appendChild(c);
+
+  const label = document.createElementNS('http://www.w3.org/2000/svg','text');
+  label.setAttribute('x', x + 12); label.setAttribute('y', y + 4);
+  label.setAttribute('class','label');
+  label.textContent = st.title.replace(' — ',' – ');
+  g.appendChild(label);
+
+  g.addEventListener('mouseenter', (e)=>{
+    tooltip.textContent = st.sub || st.title;
+    tooltip.style.left = (x * (svg.clientWidth/1200)) + 'px';
+    tooltip.style.top  = (y * (svg.clientHeight/800)) + 'px';
+    tooltip.classList.remove('hidden');
+  });
+  g.addEventListener('mouseleave', ()=> tooltip.classList.add('hidden'));
+  g.addEventListener('click', ()=> openPanel(st));
+
+  svg.appendChild(g);
+}
+
+function openPanel(st){
+  titleEl.textContent = st.title;
+  subEl.textContent   = st.sub || '';
+  bodyEl.textContent  = st.body || '';
+  bulletsEl.innerHTML = (st.bullets || []).map(b=>`<li>${b}</li>`).join('');
+  tagsEl.innerHTML    = (st.tags || []).map(t=>`<span class="tag">${t}</span>`).join('');
+  linksEl.innerHTML   = (st.links || []).map(l=>`<a href="${l.href}" target="_blank" rel="noreferrer">${l.label}</a>`).join('');
+  panel.classList.remove('hidden');
+  panel.scrollTop = 0;
+}
+
+// ---- Filters ----
+document.querySelectorAll('.legend input[type="checkbox"]').forEach(cb=>{
+  cb.addEventListener('change', ()=>{
+    const line = cb.dataset.line;
+    const on = cb.checked;
+    // rails
+    svg.querySelectorAll(`.rail.${LINES.find(l=>l.id===line).css}`).forEach(el=>{
+      el.style.display = on ? '' : 'none';
+    });
+    // stations
+    svg.querySelectorAll(`.station[data-line="${line}"]`).forEach(el=>{
+      el.style.display = on ? '' : 'none';
+    });
+  });
 });
 
-function addMsg(role, text) {
-  const el = document.createElement('div');
-  el.className = `msg ${role}`;
-  el.textContent = text;
-  messagesEl.appendChild(el);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return el;
-}
-function setProgress(frac, text, target) {
-  const pct = Math.round(frac * 100);
-  progressWrap.classList.remove('hidden');
-  progressBar.style.width = `${pct}%`;
-  if (target) target.textContent = `${text} — ${pct}%`;
-  if (pct >= 100) setTimeout(() => progressWrap.classList.add('hidden'), 300);
-}
-
-// Environment warnings
-(function () {
-  const warn = [];
-  if (!('gpu' in navigator)) warn.push('WebGPU not detected — LLM may fall back to retrieval-only.');
-  if (location.protocol === 'file:') warn.push('Serve from a web server (GitHub Pages or local) for proper module downloads.');
-  if (warn.length) {
-    const box = document.createElement('div');
-    box.className = 'ctx-card';
-    box.innerHTML = warn.map(w => `• ${w}`).join('<br>');
-    document.querySelector('#env-warnings').appendChild(box);
+// ---- Search ----
+searchEl.addEventListener('keydown', (e)=>{
+  if (e.key === 'Enter'){
+    const q = searchEl.value.trim().toLowerCase();
+    if (!q) return;
+    const hit = STATIONS.find(s =>
+      s.title.toLowerCase().includes(q) ||
+      (s.sub||'').toLowerCase().includes(q) ||
+      (s.body||'').toLowerCase().includes(q) ||
+      (s.tags||[]).some(t=>t.toLowerCase().includes(q))
+    );
+    if (hit) openPanel(hit);
   }
-})();
+});
 
-// ---------- Embeddings ----------
-const EMBED_MODEL = 'Xenova/all-MiniLM-L6-v2';
-let extractor = null;
-let embedCache = null;
-const STORAGE_KEY = `resume_embedcache_v2_${EMBED_MODEL}`;
-
-function dot(a, b) { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * b[i]; return s; }
-function norm(a) { let s = 0; for (let i = 0; i < a.length; i++) s += a[i] * a[i]; return Math.sqrt(s); }
-function normalize(vec) { const n = norm(vec) || 1e-12; return vec.map(v => v / n); }
-
-async function initEmbeddings() {
-  try {
-    embedStatus.textContent = 'Loading…';
-    const { pipeline } = transformers;
-    const device = ('gpu' in navigator) ? 'webgpu' : 'auto';
-    extractor = await pipeline('feature-extraction', EMBED_MODEL, { device });
-
-    const cached = localStorage.getItem(STORAGE_KEY);
-    if (cached) {
-      embedCache = JSON.parse(cached);
-      embedStatus.textContent = `Ready (cached ${embedCache.vectors.length} chunks)`;
-      return;
-    }
-
-    const vectors = [];
-    for (let i = 0; i < RESUME_CHUNKS.length; i++) {
-      const tex = RESUME_CHUNKS[i].text;
-      const tens = await extractor(tex, { pooling: 'mean', normalize: false });
-      const arr = Array.from(tens.data);
-      const nrm = normalize(arr);
-      vectors.push(nrm);
-      setProgress((i + 1) / RESUME_CHUNKS.length, `Embedding ${i + 1}/${RESUME_CHUNKS.length}`, embedStatus);
-      await new Promise(r => setTimeout(r));
-    }
-    embedCache = { model: EMBED_MODEL, vectors, meta: RESUME_CHUNKS.map(({id, section}) => ({id, section})), version: 2 };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(embedCache));
-    embedStatus.textContent = `Ready (${vectors.length} chunks)`;
-  } catch (e) {
-    console.error(e);
-    embedStatus.textContent = 'Error loading embeddings';
-  }
-}
-
-function topK(queryVec, k = 6) {
-  const scores = embedCache.vectors.map((v, i) => ({ i, score: dot(v, queryVec) }));
-  scores.sort((a, b) => b.score - a.score);
-  return scores.slice(0, k).map(s => ({ score: s.score, ...RESUME_CHUNKS[s.i] }));
-}
-
-// ---------- WebLLM ----------
-let engine = null;
-let llmReady = false;
-let selectedModelId = null;
-
-async function initLLM() {
-  if (!('gpu' in navigator)) {
-    llmStatus.textContent = 'WebGPU not available — retrieval-only mode.';
+// ---- Text / Print View ----
+textViewBtn.addEventListener('click', ()=>{
+  if (!printable.classList.contains('hidden')) { // hide
+    printable.classList.add('hidden');
     return;
   }
-  const tinyFirst = toggleTurbo.checked;
-  const preferredTiny = [
-    'Qwen2.5-1.5B-Instruct-q4f32_1-MLC',
-    'Phi-3.5-mini-instruct-q4f32_1-MLC',
-    'Llama-3.2-3B-Instruct-q4f32_1-MLC'
+  printContent.innerHTML = '';
+  const sections = [
+    { title:'Experience', ids:['pzs','here','suny','samsung'] },
+    { title:'Projects', ids:['proj_mri','proj_bert','proj_rag'] },
+    { title:'Education', ids:['edu_suny','edu_vit'] },
+    { title:'Publications & Patents', ids:['pub_main','pub_submit','patents'] },
+    { title:'Skills', ids:['skill_lang','skill_cv','skill_ml','skill_models','skill_ops'] },
+    { title:'Contact', ids:['contact'] }
   ];
-  const preferredLarge = [
-    'Llama-3.1-8B-Instruct-q4f16_1-MLC',
-    'Qwen2.5-3B-Instruct-q4f32_1-MLC'
-  ];
-
-  try {
-    const avail = webllm.prebuiltAppConfig.model_list.map(m => m.model_id);
-    const pref = tinyFirst ? preferredTiny.concat(preferredLarge) : preferredLarge.concat(preferredTiny);
-    selectedModelId = pref.find(id => avail.includes(id)) || avail[0];
-
-    llmStatus.textContent = `Downloading ${selectedModelId}…`;
-    const engineOpts = {
-      initProgressCallback: (p) => {
-        const frac = Math.max(0, Math.min(1, (p?.progress ?? 0)));
-        setProgress(frac, p?.text || 'Preparing model', llmStatus);
-      }
-    };
-    engine = await webllm.CreateMLCEngine(selectedModelId, engineOpts);
-    llmReady = true;
-    llmStatus.textContent = `Ready (${selectedModelId})`;
-
-    if (toggleWarm.checked) {
-      await engine.chat.completions.create({
-        messages: [{ role:'user', content:'Hello' }],
-        max_tokens: 4, temperature: 0
-      });
+  for (const sec of sections){
+    const wrap = document.createElement('section');
+    const h = document.createElement('h2'); h.textContent = sec.title; wrap.appendChild(h);
+    for (const id of sec.ids){
+      const s = STATIONS.find(x=>x.id===id); if (!s) continue;
+      const h3 = document.createElement('h3'); h3.textContent = s.title; wrap.appendChild(h3);
+      if (s.sub){ const p = document.createElement('p'); p.className='muted'; p.textContent = s.sub; wrap.appendChild(p); }
+      if (s.body){ const p = document.createElement('p'); p.textContent = s.body; wrap.appendChild(p); }
+      if (s.bullets?.length){ const ul = document.createElement('ul'); s.bullets.forEach(b=>{ const li=document.createElement('li'); li.textContent=b; ul.appendChild(li); }); wrap.appendChild(ul); }
+      if (s.tags?.length){ const p=document.createElement('p'); p.className='muted'; p.textContent='Tags: '+s.tags.join(', '); wrap.appendChild(p); }
+      if (s.links?.length){ const p=document.createElement('p'); p.innerHTML=s.links.map(l=>`<a href="${l.href}" target="_blank">${l.label}</a>`).join(' · '); wrap.appendChild(p); }
     }
-  } catch (e) {
-    console.error(e);
-    llmStatus.textContent = 'Failed to load WebLLM — retrieval-only mode.';
+    printContent.appendChild(wrap);
   }
-}
-
-async function generateAnswer(question, hits) {
-  const context = hits.map((h, i) => `[${i+1}] (${h.section}) ${h.text}`).join('\n');
-  const sys = 'You are a concise portfolio assistant for Tridev Methuku. Answer only using the provided context. If unsure, say "Not in the resume." Cite snippets by [index].';
-  const userPrompt = `Context:\n${context}\n\nUser question: ${question}\n\nAnswer (cite with [1], [2], ... as needed):`;
-
-  const maxTokens = Math.max(64, Math.min(512, Number(maxTokensEl.value) || 192));
-
-  if (llmReady && engine) {
-    try {
-      if (toggleStream.checked) {
-        const thinking = addMsg('bot', '');
-        const stream = await engine.chat.completions.create({
-          messages: [{ role: 'system', content: sys }, { role: 'user', content: userPrompt }],
-          temperature: 0.1, max_tokens: maxTokens, stream: true
-        });
-        let full = '';
-        for await (const chunk of stream) {
-          const delta = chunk?.choices?.[0]?.delta?.content ?? '';
-          if (delta) { full += delta; thinking.textContent = full; }
-        }
-        return thinking.textContent;
-      }
-      const reply = await engine.chat.completions.create({
-        messages: [{ role: 'system', content: sys }, { role: 'user', content: userPrompt }],
-        temperature: 0.1, max_tokens: maxTokens
-      });
-      return reply.choices[0].message.content;
-    } catch (e) {
-      console.error(e);
-    }
-  }
-  let summary = 'Top matching snippets:\n' + hits.map((h, i) => `[${i+1}] ${h.text}`).join('\n');
-  summary += '\n\n(LLM fell back — WebGPU or model not ready.)';
-  return summary;
-}
-
-document.querySelector('#send').addEventListener('click', onSend);
-document.querySelector('#reset').addEventListener('click', () => { messagesEl.innerHTML = ''; ctxViewEl.innerHTML = ''; });
-
-document.querySelector('#prompt').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); onSend(); }
+  printable.classList.remove('hidden');
 });
 
-async function onSend() {
-  const q = document.querySelector('#prompt').value.trim();
-  if (!q) return;
-  document.querySelector('#prompt').value = '';
-  addMsg('user', q);
+// click outside print to close
+printable.addEventListener('click', (e)=>{
+  if (e.target === printable) printable.classList.add('hidden');
+});
 
-  const tens = await extractor(q, { pooling: 'mean', normalize: false });
-  const qvec = normalize(Array.from(tens.data));
-
-  const hits = topK(qvec, 6);
-  ctxViewEl.innerHTML = hits.map((h, i) => `
-    <div class="ctx-card">
-      <h4>[${i+1}] ${h.section}</h4>
-      <p>${h.text}</p>
-    </div>
-  `).join('');
-
-  const thinking = addMsg('bot', 'Thinking…');
-  const answer = await generateAnswer(q, hits);
-  thinking.textContent = answer;
-  const meta = document.createElement('span');
-  meta.className = 'meta';
-  meta.textContent = 'Sources: ' + hits.map((h, i) => `[${i+1}:${h.id}]`).join(' ');
-  thinking.appendChild(meta);
+// ---- Init ----
+function init(){
+  // rails
+  LINES.forEach(drawLine);
+  // stations
+  STATIONS.forEach(drawStation);
 }
-
-(async function init() {
-  await initEmbeddings();
-  await initLLM();
-  addMsg('bot', 'Hi! Ask me anything about Tridev’s background. First load may download models; Turbo is ON to pick a tiny model for faster answers.');
-})();
+init();
