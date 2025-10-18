@@ -1,165 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume - Tridev Methuku</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            font-size: 2em;
-            text-transform: uppercase;
-        }
-        .contact-info {
-            text-align: center;
-            margin: 10px 0;
-        }
-        .contact-info a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: black;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        h2 {
-            text-transform: uppercase;
-            font-size: 1.5em;
-            border-bottom: 1px solid black;
-            padding-bottom: 5px;
-        }
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        ul li {
-            margin-bottom: 10px;
-        }
-        table {
-            width: 100%;
-        }
-        table td {
-            padding: 5px;
-        }
-        .project, .experience, .education {
-            margin-bottom: 15px;
-        }
-        .summary {
-            font-size: 1.1em;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tridev — RAG Resume Chat</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Tridev Methuku</h1>
-        <div class="contact-info">
-            <span>&#9742; +1 716-7503488</span> | 
-            <a href="mailto:tridevmethuku@gmail.com">&#9993; tridevmethuku@gmail.com</a> | 
-            <a href="https://github.com/Tridev-github/"><i class="fa fa-github"></i> GitHub: Tridev Methuku</a>
-        </div>
-
-        <div class="section">
-            <h2>Summary</h2>
-            <p class="summary">
-                Eager to contribute to the IT industry by applying my technical skills and passion for continuous improvement. I aim to drive innovative solutions and exceed expectations in my field, tackling new challenges with determination and a commitment to lifelong learning.
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>Technical Skills</h2>
-            <ul>
-                <li><strong>Programming Languages:</strong> C, C++, Python, Java</li>
-                <li><strong>Areas of study:</strong> Machine Learning, Deep Learning, Natural Language Processing, LLMs, Generative Adversarial Networks, Statistics, Predictive Analytics</li>
-                <li><strong>Web technologies & frameworks:</strong> HTML, CSS, JavaScript, Django, Node.js</li>
-                <li><strong>Database Systems:</strong> SQL, PostgreSQL, MongoDB</li>
-                <li><strong>Other Tools:</strong> Git, Tableau</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Professional Experience</h2>
-            <div class="experience">
-                <strong>Samsung</strong> <span style="float: right;">Dec 2023 - Apr 2024</span><br>
-                <i>Image Solutions Intern</i>
-                <ul>
-                    <li>Collaborated on identifying ghost artifacts in multi-frame HDR processed images using SSD-MobileNet, optimizing image quality for mobile devices.</li>
-                    <li>Technologies Used: Python, TensorFlow, SSD-MobileNet, Multi-frame HDR Processing</li>
-                    <li>Improved artifact detection accuracy from <strong>88% to 93%</strong>, enhancing HDR image processing feasibility for mobile platforms.</li>
-                </ul>
-            </div>
-
-            <div class="experience">
-                <strong>Point Zero Solutions</strong> <span style="float: right;">Dec 2022 - Mar 2023</span><br>
-                <i>Automation Development Intern</i>
-                <ul>
-                    <li>Developed a smart parking solution using image analysis and object detection for real-time parking availability updates via a user-friendly interface.</li>
-                    <li>Technologies Used: Python, OpenCV, Flask, YOLO, MySQL, Object Detection</li>
-                    <li>Increased parking spot detection accuracy from <strong>95.2% to 96.8%</strong>, improving user experience and optimizing parking space management.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Education</h2>
-            <table>
-                <tr>
-                    <td><strong>State University of New York at Buffalo</strong></td>
-                    <td style="text-align: right;">Aug 2024 - Present</td>
-                </tr>
-                <tr>
-                    <td>Master of Science - Computer Science</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><strong>Vellore Institute of Technology</strong></td>
-                    <td style="text-align: right;">Jul 2020 - Jun 2024</td>
-                </tr>
-                <tr>
-                    <td>Bachelor of Technology - Computer Science with specialization in Data Science</td>
-                    <td style="text-align: right;"><strong>GPA: 8.8</strong></td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="section">
-            <h2>Projects</h2>
-            <div class="project">
-                <strong>Image Restoration and Inpainting Project</strong>
-                <ul>
-                    <li>Developed an advanced image inpainting model using UNet architecture with partial convolutions, improving image restoration quality and minimizing color mismatches.</li>
-                    <li>Technologies Used: Python, TensorFlow, UNet, Partial Convolutions</li>
-                    <li>Reduced image restoration time by <strong>30%</strong>, from 10 seconds to 7 seconds per image.</li>
-                </ul>
-            </div>
-
-            <div class="project">
-                <strong>Synthetic Data Generation for MRI Privacy Preservation</strong>
-                <ul>
-                    <li>Developed a novel GAN-based approach to generate synthetic MRI data while preserving patient privacy, using a modified U-Net as the generator and a tailored CNN as the discriminator.</li>
-                    <li>Technologies Used: Python, TensorFlow, GANs, U-Net, CNN</li>
-                    <li>Achieved a <strong>generator loss of 3.5</strong> and a <strong>discriminator loss of 0.5</strong> with a dataset of 200,000 medical images.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Volunteer Experience & Other Projects</h2>
-            <ul>
-                <li>Conducted programming and DSA sessions for students from various academic backgrounds, enhancing their coding skills.</li>
-                <li>Managed the club’s hiring processes and day-to-day activities, including content creation and recruitment.</li>
-                <li><strong>Other Projects:</strong> Decentralized File Storage, Image Caption Generator, Music Genre Classification, Log4j Vulnerability Analysis, and more.</li>
-            </ul>
-        </div>
+  <header>
+    <h1>Tridev — Chat with my Résumé</h1>
+    <div id="status">
+      <span id="embed-status">Embeddings: loading…</span>
+      <span id="llm-status">LLM: initializing…</span>
     </div>
+    <p class="note">
+      100% in your browser. First load downloads small models—give it a moment.
+      If your device doesn’t support WebGPU, it will fall back to retrieval-only answers.
+    </p>
+  </header>
+
+  <main>
+    <section id="chat">
+      <div id="messages" aria-live="polite"></div>
+      <form id="composer">
+        <input id="prompt" type="text" placeholder="Ask me anything about my experience, skills, projects…" autocomplete="off" />
+        <button id="send" type="submit">Send</button>
+      </form>
+    </section>
+
+    <aside id="sidebar">
+      <h2>Sample questions</h2>
+      <ul>
+        <li class="suggest">What did you build at HERE for lane-level guidance?</li>
+        <li class="suggest">Summarize my RAG stack and tooling.</li>
+        <li class="suggest">Which projects show medical imaging work?</li>
+        <li class="suggest">What quantization/pruning wins did I get?</li>
+      </ul>
+
+      <details>
+        <summary>About this demo</summary>
+        <ul>
+          <li>Embeddings: <code>all-MiniLM-L6-v2</code> via Transformers.js</li>
+          <li>Vector search: cosine similarity (normalized vectors)</li>
+          <li>LLM (in-browser): WebLLM (small model, WebGPU)</li>
+          <li>No servers, no API keys, static hosting via GitHub Pages</li>
+        </ul>
+      </details>
+    </aside>
+  </main>
+
+  <footer>
+    <small>
+      Built for demo purposes. Answers are grounded in the résumé snippets shown as sources.
+    </small>
+  </footer>
+
+  <!-- App code -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>
