@@ -3,54 +3,86 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tridev Methuku — Resume Chat (100% Browser)</title>
+  <title>Tridev Methuku — Résumé Chat (All-Browser, Turbo)</title>
+  <meta name="theme-color" content="#141414" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://esm.run" crossorigin />
+  <link rel="preconnect" href="https://huggingface.co" crossorigin />
 </head>
 <body>
-  <header>
-    <h1>Tridev Methuku</h1>
-    <p class="sub">Chat with my resume — runs entirely in your browser (no server, no API keys).</p>
-    <div id="env-warnings"></div>
+  <div class="bg-veil"></div>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Tridev Methuku</h1>
+      <p>Chat with my résumé — cinematic UI, 100% in your browser.</p>
+      <div class="chip-row">
+        <span class="chip">No servers</span>
+        <span class="chip">No API keys</span>
+        <span class="chip">WebGPU acceleration</span>
+      </div>
+      <div id="env-warnings"></div>
+    </div>
   </header>
 
-  <main>
-    <section id="status">
-      <div class="card">
-        <h3>Model Status</h3>
-        <div class="row"><span>Embeddings (Transformers.js):</span><span id="embed-status">Initializing…</span></div>
-        <div class="row"><span>LLM (WebLLM):</span><span id="llm-status">Checking WebGPU…</span></div>
-        <div id="progress-wrap" class="hidden">
-          <div id="progress-bar"></div>
+  <main class="layout">
+    <section class="panel status card">
+      <h3>System Status</h3>
+      <div class="kv">
+        <div>Embeddings</div><div id="embed-status">Initializing…</div>
+      </div>
+      <div class="kv">
+        <div>LLM</div><div id="llm-status">Checking WebGPU…</div>
+      </div>
+      <div id="progress-wrap" class="progress hidden"><div id="progress-bar"></div></div>
+
+      <div class="controls">
+        <label class="toggle"><input id="toggle-turbo" type="checkbox" checked /> <span>Turbo (prefer tiny model)</span></label>
+        <label class="toggle"><input id="toggle-warm" type="checkbox" checked /> <span>Warm-up compile</span></label>
+        <label class="toggle"><input id="toggle-stream" type="checkbox" /> <span>Stream tokens*</span></label>
+        <div class="hint">*Streaming depends on browser speed; if unstable, turn off.</div>
+        <div class="row">
+          <label for="max-tokens">Max tokens</label>
+          <input id="max-tokens" type="number" min="64" max="512" value="192" />
         </div>
       </div>
     </section>
 
-    <section id="chat">
-      <div id="messages"></div>
-      <div id="input-wrap">
-        <input id="prompt" placeholder="Ask about Tridev (e.g., 'What did you do at HERE?')" />
+    <section class="panel chat card">
+      <div class="chat-window" id="messages"></div>
+      <div class="composer">
+        <input id="prompt" placeholder="Ask about Tridev (e.g., 'Summarize Samsung work')" />
         <button id="send">Send</button>
         <button id="reset" class="ghost">Reset</button>
       </div>
-      <details id="ctx-details">
-        <summary>Show last answer's retrieved context</summary>
-        <div id="ctx-view"></div>
-      </details>
       <div class="tips">
         <strong>Try:</strong>
-        <code>What’s your background in RAG?</code> •
-        <code>Summarize Samsung work in 2 lines.</code> •
-        <code>What are your top skills?</code>
+        <code>What did you do in computer vision?</code>
+        <code>What’s your RAG stack?</code>
+        <code>Top 3 projects in one line each.</code>
       </div>
     </section>
+
+    <aside class="panel ctx card">
+      <div class="ctx-header">
+        <h3>Retrieved Context</h3>
+        <button id="collapse-ctx" class="ghost small">Toggle</button>
+      </div>
+      <div id="ctx-view" class="ctx-grid"></div>
+    </aside>
   </main>
 
-  <footer>
-    <p>Built with <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noreferrer">Transformers.js</a>
-       and <a href="https://webllm.mlc.ai" target="_blank" rel="noreferrer">WebLLM</a>. Everything runs in your browser.</p>
+  <footer class="foot">
+    <p>Built with <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noreferrer">Transformers.js</a> + <a href="https://webllm.mlc.ai" target="_blank" rel="noreferrer">WebLLM</a>. <span class="dot">•</span> Theme: Netflix-style dark.</p>
   </footer>
 
-  <!-- App scripts (ESM modules) -->
   <script type="module" src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(console.error);
+      });
+    }
+  </script>
 </body>
 </html>
