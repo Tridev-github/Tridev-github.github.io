@@ -2,60 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tridev — RAG Resume Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tridev Methuku — Resume Chat (100% Browser)</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Tridev — Chat with my Résumé</h1>
-    <div id="status">
-      <span id="embed-status">Embeddings: loading…</span>
-      <span id="llm-status">LLM: initializing…</span>
-    </div>
-    <p class="note">
-      100% in your browser. First load downloads small models—give it a moment.
-      If your device doesn’t support WebGPU, it will fall back to retrieval-only answers.
-    </p>
+    <h1>Tridev Methuku</h1>
+    <p class="sub">Chat with my resume — runs entirely in your browser (no server, no API keys).</p>
+    <div id="env-warnings"></div>
   </header>
 
   <main>
-    <section id="chat">
-      <div id="messages" aria-live="polite"></div>
-      <form id="composer">
-        <input id="prompt" type="text" placeholder="Ask me anything about my experience, skills, projects…" autocomplete="off" />
-        <button id="send" type="submit">Send</button>
-      </form>
+    <section id="status">
+      <div class="card">
+        <h3>Model Status</h3>
+        <div class="row"><span>Embeddings (Transformers.js):</span><span id="embed-status">Initializing…</span></div>
+        <div class="row"><span>LLM (WebLLM):</span><span id="llm-status">Checking WebGPU…</span></div>
+        <div id="progress-wrap" class="hidden">
+          <div id="progress-bar"></div>
+        </div>
+      </div>
     </section>
 
-    <aside id="sidebar">
-      <h2>Sample questions</h2>
-      <ul>
-        <li class="suggest">What did you build at HERE for lane-level guidance?</li>
-        <li class="suggest">Summarize my RAG stack and tooling.</li>
-        <li class="suggest">Which projects show medical imaging work?</li>
-        <li class="suggest">What quantization/pruning wins did I get?</li>
-      </ul>
-
-      <details>
-        <summary>About this demo</summary>
-        <ul>
-          <li>Embeddings: <code>all-MiniLM-L6-v2</code> via Transformers.js</li>
-          <li>Vector search: cosine similarity (normalized vectors)</li>
-          <li>LLM (in-browser): WebLLM (small model, WebGPU)</li>
-          <li>No servers, no API keys, static hosting via GitHub Pages</li>
-        </ul>
+    <section id="chat">
+      <div id="messages"></div>
+      <div id="input-wrap">
+        <input id="prompt" placeholder="Ask about Tridev (e.g., 'What did you do at HERE?')" />
+        <button id="send">Send</button>
+        <button id="reset" class="ghost">Reset</button>
+      </div>
+      <details id="ctx-details">
+        <summary>Show last answer's retrieved context</summary>
+        <div id="ctx-view"></div>
       </details>
-    </aside>
+      <div class="tips">
+        <strong>Try:</strong>
+        <code>What’s your background in RAG?</code> •
+        <code>Summarize Samsung work in 2 lines.</code> •
+        <code>What are your top skills?</code>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <small>
-      Built for demo purposes. Answers are grounded in the résumé snippets shown as sources.
-    </small>
+    <p>Built with <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noreferrer">Transformers.js</a>
+       and <a href="https://webllm.mlc.ai" target="_blank" rel="noreferrer">WebLLM</a>. Everything runs in your browser.</p>
   </footer>
 
-  <!-- App code -->
+  <!-- App scripts (ESM modules) -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
