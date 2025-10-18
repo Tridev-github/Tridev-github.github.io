@@ -1,0 +1,172 @@
+{
+  "person": {
+    "name": "Tridev Methuku",
+    "phone": "+1 (716) 750-3488",
+    "email": "tridevmethuku.0@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/tridev-reddy-methuku-590535203/",
+    "tagline": "Research Engineer • ML/CV • RAG & Agents • MLOps"
+  },
+
+  "skills": {
+    "Languages": ["Python", "C++", "Java", "SQL", "Bash"],
+    "ML/DL": ["PyTorch", "TensorFlow", "Keras", "scikit-learn"],
+    "Models": ["CNNs", "U-Net", "GANs", "BERT", "GNNs"],
+    "LLM/Agents": ["LangChain", "LlamaIndex", "RAG", "MCP"],
+    "CV/Imaging": ["OpenCV", "YOLO", "SSD", "HDR", "GATE", "ROOT"],
+    "Data/Platforms": ["Pandas", "NumPy", "Airflow", "Spark"],
+    "MLOps/Infra": ["Docker", "AWS", "MLflow", "Linux", "Git", "FastAPI", "Kubernetes"],
+    "Optimization": ["Quantization", "Pruning", "Compression", "Edge deployment"]
+  },
+
+  "experience": [
+    {
+      "company": "HERE Technologies",
+      "role": "Research Engineer Intern",
+      "location": "Chicago, IL",
+      "start": "May 2025",
+      "end": "Aug 2025",
+      "bullets": [
+        "Developed lane-level analytics from graph-structured and image-based geospatial data for last-meter navigation.",
+        "Prototyped GenAI guidance for micro-addressing and lane transitions; improved route prediction accuracy by 12%.",
+        "Orchestrated multi-LLM (routing/ensembles) and multimodal (vision + lane-graph + text) models with retrieval grounding.",
+        "Deployed cloud prototypes on AWS with Docker; CI/CD and monitoring for >10K daily queries."
+      ],
+      "metrics": ["+12% route prediction accuracy", "10K+ daily queries"],
+      "tags": ["Python", "RAG", "LangChain", "AWS", "Docker", "Redis", "FastAPI", "CV", "GNNs", "multimodal", "agents"],
+      "proof": []
+    },
+    {
+      "company": "SUNY Research Foundation",
+      "role": "Research Lead — Research Aide",
+      "location": "Buffalo, NY",
+      "start": "Sep 2024",
+      "end": "Present",
+      "bullets": [
+        "Led a team of 5 to optimize SPECT geometry with ML/DL, improving spatial resolution by 18%.",
+        "Automated imaging pipelines with SQL, Pandas, Airflow (throughput -30%).",
+        "Accelerated Monte Carlo reconstruction by 20% using simulation-informed modeling (GATE/ROOT).",
+        "Built AI agents (LangChain + MCP) on a RAG backend; ingestion via Airflow to S3/Postgres, parsing with unstructured/pdfminer.",
+        "Designed and deployed RAG: FAISS→Pinecone, hybrid dense+BM25 retrieval (E5-large/text-embedding-3-large), re-ranking (BGE/Cross-Encoder), metadata filters, Redis caching, FastAPI, MLflow evals (hit@k, MRR).",
+        "Translated research into deployable tools with clinicians; secured $800K funding."
+      ],
+      "metrics": ["+18% spatial resolution", "-30% pipeline time", "+20% reconstruction speed", "$800K funding"],
+      "tags": ["Python", "PyTorch", "RAG", "Agents", "Airflow", "SQL", "Pandas", "GATE", "ROOT", "Pinecone", "FAISS", "Redis", "FastAPI", "MLflow"],
+      "proof": []
+    },
+    {
+      "company": "Samsung R&D",
+      "role": "Image Solutions Intern",
+      "location": "Bengaluru, India",
+      "start": "Aug 2023",
+      "end": "Apr 2024",
+      "bullets": [
+        "Trained SSD-MobileNet to detect HDR ghost artifacts; 93% detection accuracy.",
+        "Built a large HDR ghosting dataset with labeling guides and QA checks.",
+        "Applied quantization and pruning; +25% inference speed, -40% model size.",
+        "Shipped in production camera imaging; active on millions of Samsung phones."
+      ],
+      "metrics": ["93% detection", "+25% speed", "-40% size", "Millions of devices"],
+      "tags": ["Python", "CV", "SSD", "MobileNet", "HDR", "Quantization", "Pruning", "Edge deployment"],
+      "proof": []
+    },
+    {
+      "company": "Point Zero Solutions",
+      "role": "Artificial Intelligence Intern",
+      "location": "Remote",
+      "start": "May 2022",
+      "end": "May 2023",
+      "bullets": [
+        "Designed a real-time computer vision system for automated parking; 96.8% detection accuracy at 100K images/day.",
+        "Built and deployed a GAN+RNN/LSTM pedestrian traffic model with DEEP SORT; +15% accuracy via optimized preprocessing.",
+        "Presented to stakeholders showing energy-cost reduction via pedestrian-based power optimization."
+      ],
+      "metrics": ["96.8% detection", "100K images/day", "+15% accuracy"],
+      "tags": ["Python", "CV", "GANs", "RNN", "LSTM", "DEEP SORT", "Real-time"],
+      "proof": []
+    }
+  ],
+
+  "education": [
+    {
+      "school": "State University of New York at Buffalo",
+      "degree": "M.S. in Computer Science (AI/ML)",
+      "gpa": "3.96/4.00",
+      "location": "Buffalo, NY",
+      "start": "Aug 2024",
+      "end": "Present",
+      "tags": ["AI/ML", "Research"]
+    },
+    {
+      "school": "Vellore Institute of Technology",
+      "degree": "B.Tech in Computer Science (Data Science)",
+      "gpa": "3.52/4.00",
+      "location": "Vellore, India",
+      "start": "Jul 2020",
+      "end": "Jun 2024",
+      "tags": ["Data Science"]
+    }
+  ],
+
+  "projects": [
+    {
+      "title": "GAN-based Synthetic MRI Generation",
+      "meta": "Docker + AWS SageMaker • MLflow",
+      "bullets": [
+        "End-to-end GAN pipeline with U-Net/CNN priors; FID = 15.2, expanding MRI diversity.",
+        "Deployed on SageMaker with Docker; tracked experiments in MLflow."
+      ],
+      "metrics": ["FID 15.2"],
+      "tags": ["GANs", "U-Net", "CNNs", "Docker", "AWS", "MLflow", "CV"]
+    },
+    {
+      "title": "Transformer-based Text Classification (NLP)",
+      "meta": "PyTorch • HuggingFace Transformers • scikit-learn",
+      "bullets": [
+        "Fine-tuned BERT on IMDb sentiment dataset; 94.2% accuracy.",
+        "Robust training/eval pipeline with reproducible seeds and stratified splits."
+      ],
+      "metrics": ["94.2% accuracy"],
+      "tags": ["BERT", "PyTorch", "NLP", "Transformers", "ML/DL"]
+    },
+    {
+      "title": "LLM Agents & Retrieval-Augmented Generation (RAG)",
+      "meta": "FAISS/Pinecone • LoRA",
+      "bullets": [
+        "Engineered AI agents with MCP tool orchestration.",
+        "Hybrid retrieval (dense+BM25) and cross-encoder re-ranking; -22% latency, +15% accuracy.",
+        "LoRA fine-tuning for efficient domain adaptation."
+      ],
+      "metrics": ["-22% retrieval latency", "+15% answer accuracy"],
+      "tags": ["RAG", "Agents", "LangChain", "Pinecone", "FAISS", "LoRA", "Redis", "FastAPI"]
+    }
+  ],
+
+  "publications": [
+    {
+      "title": "Spatial-resolution metrics for self-collimation SPECT using DL for projection modeling",
+      "venue": "SNMMI 2025 (presented); IEEE NSS/MIC/RTSD 2025 (accepted)",
+      "year": "2025",
+      "tags": ["CV", "Imaging", "ML/DL"]
+    },
+    {
+      "title": "BCS^2: fast, adaptive 2-parameter clustering for telemetry/fleet analytics",
+      "venue": "KDD 2026 (submitted)",
+      "year": "2026",
+      "tags": ["ML/DL", "Clustering"]
+    },
+    {
+      "title": "Spatial-resolution metrics for tomography",
+      "venue": "SPIE 2026 (submitted)",
+      "year": "2026",
+      "tags": ["CV", "Imaging"]
+    }
+  ],
+
+  "patents": [
+    { "title": "Vehicle Lane Acceleration Profiles (VLAP)", "status": "Filed", "tags": ["CV", "GNNs", "Navigation"], "year": "2025" },
+    { "title": "Lane-level trajectory sharing", "status": "Filed", "tags": ["CV", "Navigation"], "year": "2025" },
+    { "title": "BCS^2 POI discovery", "status": "Filed", "tags": ["Clustering", "Analytics"], "year": "2026" },
+    { "title": "Direction-aware lane matching", "status": "Filed", "tags": ["CV", "Navigation"], "year": "2025" },
+    { "title": "Micro-point addressing for last-meter navigation", "status": "Filed", "tags": ["Navigation", "RAG"], "year": "2025" }
+  ]
+}
