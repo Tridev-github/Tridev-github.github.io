@@ -1,74 +1,76 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tridev Methuku — Transit-Map Résumé</title>
-  <meta name="theme-color" content="#0e0f12" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tridev Methuku — RPG Skill Tree Résumé</title>
+  <meta name="description" content="Interactive RPG skill tree résumé of Tridev Methuku — ML, CV, RAG, MLOps, and research projects." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23A78BFA' d='M32 3l7.8 15.8L56 21l-12 11.7L46 53 32 45 18 53l2-20.3L8 21l16.2-2.2z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./assets/main.css" />
 </head>
 <body>
   <header class="topbar">
     <div class="brand">
-      <span class="dot"></span>
-      <strong>Tridev Methuku</strong>
-      <span class="muted">Transit-Map Résumé</span>
+      <div class="avatar" aria-hidden="true">TM</div>
+      <div class="title">
+        <h1>Tridev Methuku</h1>
+        <p class="tagline">RPG Skill Tree Résumé — ML • CV • RAG • MLOps</p>
+      </div>
     </div>
-    <div class="actions">
-      <input id="search" placeholder="Search stations (e.g., Samsung, RAG, SUNY)"/>
-      <button id="textView">Text View / Print</button>
-    </div>
+
+    <nav class="actions">
+      <label class="search">
+        <input id="search" type="search" placeholder="Search skills, projects, companies…" aria-label="Search resume" />
+      </label>
+
+      <div class="lenses" role="group" aria-label="Lenses">
+        <button class="lens" data-lens="all" aria-pressed="true">All</button>
+        <button class="lens" data-lens="ml">ML</button>
+        <button class="lens" data-lens="cv">CV</button>
+        <button class="lens" data-lens="agents">Agents/RAG</button>
+        <button class="lens" data-lens="backend">Backend</button>
+        <button class="lens" data-lens="lead">Leadership</button>
+      </div>
+
+      <button id="themeToggle" class="ghost" title="Toggle theme" aria-label="Toggle theme">🌗</button>
+      <button id="printBtn" class="primary" title="Print / Save PDF" aria-label="Print resume">Print</button>
+    </nav>
   </header>
 
-  <main class="layout">
-    <aside class="legend card">
-      <h3>Lines</h3>
-      <label><input type="checkbox" data-line="experience" checked/> <span class="chip chip-exp">Experience</span></label>
-      <label><input type="checkbox" data-line="projects" checked/> <span class="chip chip-proj">Projects</span></label>
-      <label><input type="checkbox" data-line="education" checked/> <span class="chip chip-edu">Education</span></label>
-      <label><input type="checkbox" data-line="publications" checked/> <span class="chip chip-pub">Pubs & Patents</span></label>
-      <label><input type="checkbox" data-line="skills" checked/> <span class="chip chip-skill">Skills</span></label>
-      <label><input type="checkbox" data-line="contact" checked/> <span class="chip chip-contact">Contact</span></label>
-      <p class="muted tip">Click a station to open details. Hover to preview.</p>
-    </aside>
-
-    <section class="map card">
-      <!-- Responsive SVG canvas -->
-      <svg id="metro" viewBox="0 0 1200 800" role="img" aria-label="Transit map of Tridev's portfolio"></svg>
-      <div id="tooltip" class="tooltip hidden"></div>
+  <main class="app">
+    <section class="canvas-wrap">
+      <svg id="skillTree" role="img" aria-label="Interactive skill tree graph"></svg>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      <noscript><p class="noscript">Enable JavaScript to view the interactive skill tree.</p></noscript>
     </section>
 
-    <aside class="panel card hidden" id="panel" aria-live="polite">
-      <button class="close" id="close">✕</button>
-      <h2 id="p-title">Station</h2>
-      <p class="muted" id="p-sub"></p>
-      <p id="p-body"></p>
-      <ul id="p-bullets"></ul>
-      <div id="p-tags" class="tags"></div>
-      <div id="p-links" class="links"></div>
+    <aside id="detail" class="detail" aria-live="polite">
+      <div class="detail-header">
+        <h2 id="detail-title">Select a node</h2>
+        <button id="closeDetail" class="ghost" aria-label="Close">✕</button>
+      </div>
+      <div id="detail-body" class="detail-body">
+        <p>Hover or click a node in the skill tree to see details: stories, metrics, and receipts.</p>
+      </div>
+      <div class="detail-footer">
+        <a id="emailLink" class="chip" href="mailto:tridevmethuku.0@gmail.com">📧 Email</a>
+        <a id="linkedinLink" class="chip" target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/tridev-reddy-methuku-590535203/">in/Tridev</a>
+        <a id="downloadJson" class="chip" href="./data/resume.json" download>🗂️ /api/resume.json</a>
+      </div>
     </aside>
   </main>
 
-  <!-- Text/Print view (for HR) -->
-  <section id="printable" class="printable hidden">
-    <div class="print-inner">
-      <h1>Tridev Methuku</h1>
-      <p class="muted">Creative résumé — printable summary</p>
-      <div id="print-content"></div>
-      <p class="muted small">This is a print view of the Transit-Map Résumé. Visit the site for the interactive map.</p>
-    </div>
-  </section>
-
-  <footer class="foot">
-    <span>Made with vanilla HTML/CSS/JS. Everything runs in your browser.</span>
+  <footer class="footer">
+    <span>© <span id="year"></span> Tridev Methuku</span>
+    <span class="sep">•</span>
+    <span>Made with D3, deployed on GitHub Pages</span>
+    <span class="sep">•</span>
+    <a href="#" id="a11yToggle">A11y: reduce motion</a>
   </footer>
 
-  <script type="module" src="data.js"></script>
-  <script type="module" src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').catch(()=>{});
-    }
-  </script>
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  <script src="./assets/app.js" type="module"></script>
 </body>
 </html>
