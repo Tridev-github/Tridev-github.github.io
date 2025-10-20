@@ -3,131 +3,107 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Your Name — ResumeOS</title>
-  <meta name="description" content="Portfolio & resume presented as interactive docs and scrollytelling." />
+  <title>Tridev Methuku — Resume RPG</title>
+  <meta name="description" content="A minimalist RPG to explore Tridev's resume." />
+  <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Swap with local fonts if you prefer fully offline -->
+  <!-- Optional; remove if you prefer system fonts only -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Your Name — ResumeOS" />
-  <meta property="og:description" content="API-docs resume + release-notes story. Command-palette. Keyboard first." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <!-- Schema.org: Person -->
-  <script type="application/ld+json" id="schema-person">
-  { "@context": "https://schema.org", "@type": "Person",
-    "name": "Your Name", "url": "https://YOUR-USERNAME.github.io/",
-    "sameAs": ["https://github.com/YOUR-USERNAME", "https://www.linkedin.com/in/YOUR-LINKEDIN/"],
-    "email": "mailto:you@example.com", "jobTitle": "Senior Software Engineer" }
+  <!-- Schema.org Person -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Tridev Methuku",
+    "url":"https://tridev-github.github.io/",
+    "email":"mailto:tridevmethuku.0@gmail.com",
+    "sameAs":[
+      "https://github.com/tridev-github",
+      "https://www.linkedin.com/in/tridev-reddy-methuku-590535203/"
+    ],
+    "jobTitle":"AI/ML Engineer & Researcher"
+  }
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#listview">Skip to accessible list view</a>
 
-  <header class="site-header" role="banner">
+  <header class="topbar">
     <div class="brand">
-      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="sidebar">☰</button>
-      <div class="logo-dot" aria-hidden="true"></div>
-      <strong class="brand-name">Your Name</strong>
-      <span class="brand-sub">ResumeOS</span>
+      <div class="dot"></div>
+      <strong>Resume RPG</strong><span class="muted"> by Tridev</span>
     </div>
-    <div class="header-actions">
-      <div class="pill-switch" role="tablist" aria-label="View mode">
-        <button role="tab" aria-selected="true" id="tab-docs" data-mode="docs">Docs</button>
-        <button role="tab" aria-selected="false" id="tab-story" data-mode="story">Story</button>
-      </div>
-      <label class="select persona" aria-label="Audience">
-        <select id="persona">
-          <option value="all">Audience: All</option>
-          <option value="recruiter">Recruiter</option>
-          <option value="engineer">Engineer</option>
-          <option value="pm">PM</option>
-        </select>
-      </label>
-      <button id="cmdk" class="btn-ghost" aria-label="Open command palette">⌘K</button>
-      <button id="theme" class="btn-ghost" aria-label="Toggle theme">🌗</button>
-      <a class="btn" href="resume.json" download>JSON</a>
-      <button class="btn outline" id="print">Print PDF</button>
-    </div>
+    <nav class="actions">
+      <button id="btn-help" class="ghost" aria-haspopup="dialog" aria-controls="help">?</button>
+      <button id="btn-fast" class="ghost" aria-haspopup="dialog" aria-controls="fasttravel">Fast travel</button>
+      <button id="btn-theme" class="ghost" aria-label="Toggle theme">☾</button>
+      <button id="btn-a11y" class="ghost" aria-pressed="false">Reduced motion</button>
+      <button id="btn-view" class="pill" aria-pressed="false">List View</button>
+      <a class="pill outline" href="resume.json" download>JSON</a>
+    </nav>
   </header>
 
-  <div class="layout">
-    <nav id="sidebar" class="sidebar" aria-label="Sections">
-      <div class="searchbox">
-        <input id="filter" type="search" placeholder="Filter nav…" aria-label="Filter sections" />
+  <main class="wrap">
+    <!-- Canvas RPG -->
+    <div class="stage">
+      <canvas id="game" width="960" height="600" role="img" aria-label="Top-down minimalist RPG to explore resume"></canvas>
+      <div id="hud" class="hud" aria-live="polite"></div>
+      <div id="tooltip" class="tooltip" role="status" aria-live="polite"></div>
+      <div id="onboarding" class="onboarding">
+        <p><kbd>WASD</kbd>/<kbd>←↑→↓</kbd> move • <kbd>E</kbd>/<kbd>Space</kbd> talk • <kbd>F</kbd> fast travel • <kbd>Cmd/Ctrl</kbd>+<kbd>K</kbd> search</p>
       </div>
-      <ul id="toc" class="toc" role="tree"></ul>
-      <footer class="sidebar-footer">
-        <a href="mailto:you@example.com">you@example.com</a>
-        <a href="https://github.com/YOUR-USERNAME">GitHub</a>
-        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN/">LinkedIn</a>
-      </footer>
-    </nav>
+    </div>
 
-    <main id="main" class="content" tabindex="-1">
-      <!-- DOCS MODE -->
-      <section id="mode-docs" data-mode-panel="docs" aria-labelledby="tab-docs">
-        <article class="intro">
-          <h1>Hi, I’m <span class="grad">Your Name</span> 👋</h1>
-          <p class="lede">I turn ambiguous problems into shipped, measurable outcomes. Pick a mode above, or hit <kbd>⌘</kbd><kbd>K</kbd> to jump.</p>
-          <ul class="quick-badges" id="quick-badges"></ul>
-        </article>
+    <!-- Accessible List View (renders from resume.json) -->
+    <section id="listview" class="listview" hidden>
+      <article id="lv-content" class="lv-content" tabindex="-1" aria-label="Accessible resume list view"></article>
+    </section>
+  </main>
 
-        <section class="block" id="experience" data-section>
-          <h2>Experience</h2>
-          <div id="experience-list" class="endpoints"></div>
-        </section>
+  <!-- Help modal -->
+  <dialog id="help" class="modal">
+    <form method="dialog">
+      <h2>How to play</h2>
+      <p>Walk into rooms (Experience, Projects, Skills, Education). Face an NPC or terminal and press <kbd>E</kbd> to read. Collect all highlights to complete the run.</p>
+      <ul>
+        <li><kbd>WASD</kbd>/<kbd>←↑→↓</kbd> Move</li>
+        <li><kbd>E</kbd>/<kbd>Space</kbd> Interact • <kbd>F</kbd> Fast travel • <kbd>Esc</kbd> Close</li>
+        <li><kbd>Cmd/Ctrl</kbd>+<kbd>K</kbd> Command palette (search companies, projects, skills)</li>
+      </ul>
+      <menu>
+        <button value="cancel" class="pill">Close</button>
+      </menu>
+    </form>
+  </dialog>
 
-        <section class="block" id="projects" data-section>
-          <h2>Projects</h2>
-          <div id="projects-list" class="endpoints"></div>
-        </section>
+  <!-- Fast travel modal -->
+  <dialog id="fasttravel" class="modal">
+    <form method="dialog">
+      <h2>Fast travel</h2>
+      <ul id="ft-list" class="ft-list"></ul>
+      <menu>
+        <button value="cancel" class="pill">Close</button>
+      </menu>
+    </form>
+  </dialog>
 
-        <section class="block" id="skills" data-section>
-          <h2>Skills</h2>
-          <div id="skills-grid" class="chips"></div>
-        </section>
-
-        <section class="block" id="education" data-section>
-          <h2>Education</h2>
-          <div id="education-list" class="cards"></div>
-        </section>
-
-        <section class="block" id="talks" data-section>
-          <h2>Talks & Writing</h2>
-          <div id="talks-list" class="cards"></div>
-        </section>
-      </section>
-
-      <!-- STORY MODE -->
-      <section id="mode-story" class="story hidden" data-mode-panel="story" aria-labelledby="tab-story">
-        <div class="story-hero">
-          <h1>Release Notes <span class="tag">v2025</span></h1>
-          <p>Highlights & impact from recent roles. Performance, reliability, product outcomes.</p>
-        </div>
-        <div id="story-timeline" class="story-steps"></div>
-      </section>
-
-      <footer class="site-footer">
-        <p>© <span id="year"></span> Your Name — Built with vanilla JS. <a href="#" id="a11y">Accessibility</a></p>
-      </footer>
-    </main>
-  </div>
-
-  <!-- Command Palette -->
-  <div id="palette" class="palette" role="dialog" aria-modal="true" aria-labelledby="palette-label" hidden>
-    <div class="palette-container" role="document">
-      <label class="palette-label" id="palette-label">Quick Search</label>
-      <input id="palette-input" type="text" placeholder="Search: company, role, project, skill…" aria-autocomplete="list" />
-      <ul id="palette-list" role="listbox" aria-label="Results"></ul>
-      <p class="palette-hint">↑↓ to navigate • Enter to open • Esc to close</p>
+  <!-- Command palette -->
+  <div id="palette" class="palette" role="dialog" aria-modal="true" aria-labelledby="plabel" hidden>
+    <div class="pal-card" role="document">
+      <label id="plabel" class="pal-title">Jump to…</label>
+      <input id="pinput" class="pal-input" type="text" placeholder="Company, project, skill…" aria-autocomplete="list" />
+      <ul id="plist" class="pal-list" role="listbox"></ul>
+      <p class="pal-hint">↑↓ to move • Enter to open • Esc to close</p>
     </div>
   </div>
 
-  <script src="app.js" defer></script>
+  <footer class="footer">
+    <p>© <span id="year"></span> Tridev Methuku • Minimalist, chic design • Built with vanilla Canvas.</p>
+  </footer>
+
+  <script src="game.js"></script>
 </body>
 </html>
-
