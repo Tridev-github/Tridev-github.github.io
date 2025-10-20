@@ -91,3 +91,4 @@ kbd{ font-family:var(--mono); border:1px solid var(--line); border-radius:6px; p
 @media (prefers-reduced-motion: reduce){
   .onboarding, .palette, .modal::backdrop{ animation:none }
 }
+
