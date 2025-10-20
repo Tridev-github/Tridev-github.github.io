@@ -9,21 +9,21 @@
     "phone": "+1 (716) 750-3488",
     "website": "https://tridev-github.github.io/",
     "linkedin": "https://www.linkedin.com/in/tridev-reddy-methuku-590535203/",
-    "github": "https://github.com/tridev-github"
+    "github": "https://github.com/tridev-github",
+    "pdf": "resume.pdf"
   },
-
   "experience": [
     {
       "company": "HERE Technologies",
       "role": "Research Engineer Intern",
       "date_range": "May 2025 — Aug 2025",
       "location": "Chicago, IL",
-      "stack": ["Python", "LLMs (multi-LLM routing/ensembles)", "Multimodal (vision+graph+text)", "Geospatial", "AWS", "Docker", "CI/CD", "Monitoring"],
+      "stack": ["Python", "LLMs (routing/ensembles)", "Multimodal (vision+graph+text)", "Geospatial", "AWS", "Docker", "CI/CD"],
       "highlights": [
-        { "text": "Built lane-level analytics from graph-structured and image geospatial data to enable accurate last-meter navigation.", "tags": ["engineer","recruiter"] },
+        { "text": "Developed lane-level analytics from graph-structured and image geospatial data for accurate last-meter navigation.", "tags": ["engineer","recruiter"] },
         { "text": "Prototyped GenAI guidance for micro-addressing and lane transitions, improving route prediction accuracy by 12%.", "tags": ["engineer","pm","recruiter"] },
-        { "text": "Orchestrated multi-LLM and multimodal models (vision + lane graph + text) with retrieval over lane/POI data for grounded instructions.", "tags": ["engineer"] },
-        { "text": "Deployed cloud-based pipeline on AWS with Docker, CI/CD and monitoring; scaled beyond 10K daily queries.", "tags": ["engineer","recruiter"] }
+        { "text": "Orchestrated multi-LLM and multimodal models with lane/POI retrieval to ground instructions.", "tags": ["engineer"] },
+        { "text": "Deployed AWS/Docker pipeline with monitoring; scaled beyond 10K daily queries.", "tags": ["engineer","recruiter"] }
       ]
     },
     {
@@ -31,14 +31,14 @@
       "role": "Research Lead — Research Aide",
       "date_range": "Sep 2024 — Present",
       "location": "Buffalo, NY",
-      "stack": ["Python", "PyTorch", "SQL", "Pandas", "Airflow", "GATE/ROOT", "LangChain", "MCP tools", "FAISS", "Pinecone", "BM25", "E5-large", "text-embedding-3-large", "BGE/Cross-Encoder re-ranking", "Redis", "FastAPI", "MLflow", "S3", "Postgres"],
+      "stack": ["Python", "PyTorch", "SQL", "Pandas", "Airflow", "GATE/ROOT", "LangChain", "MCP", "FAISS", "Pinecone", "BM25", "E5", "text-embedding-3-large", "BGE/Cross-Encoder", "Redis", "FastAPI", "MLflow", "S3", "Postgres"],
       "highlights": [
-        { "text": "Led a cross-functional team of 5 optimizing SPECT geometry with ML/DL, improving spatial resolution by 18%.", "tags": ["engineer","recruiter","pm"] },
-        { "text": "Automated imaging pipelines with SQL, Pandas, and Airflow, cutting analysis throughput time by 30%.", "tags": ["engineer","recruiter"] },
-        { "text": "Accelerated Monte Carlo reconstruction by 20% using simulation-informed modeling with GATE/ROOT.", "tags": ["engineer"] },
-        { "text": "Built AI agents (LangChain + MCP) on a RAG backend; ingestion via Airflow to S3/Postgres; tool use for search/code/data workflows.", "tags": ["engineer","pm"] },
-        { "text": "Designed & deployed RAG: FAISS (dev) → Pinecone (prod), hybrid dense+BM25 retrieval, re-ranking, metadata filters, Redis caching, FastAPI service, MLflow evals (hit@k, MRR, faithfulness), citation-grounded answers.", "tags": ["engineer"] },
-        { "text": "Collaborated with oncologists & radiologists; delivered imaging tools that helped secure $800K funding.", "tags": ["recruiter","pm"] }
+        { "text": "Led team of 5 optimizing SPECT geometry with ML/DL, improving spatial resolution by 18%.", "tags": ["engineer","recruiter","pm"] },
+        { "text": "Automated imaging pipelines with SQL/Pandas/Airflow, cutting analysis throughput time by 30%.", "tags": ["engineer","recruiter"] },
+        { "text": "Accelerated Monte Carlo reconstruction by 20% with simulation-informed modeling (GATE/ROOT).", "tags": ["engineer"] },
+        { "text": "Built AI agents (LangChain + MCP) on a RAG backend; ingestion via Airflow to S3/Postgres; tools for search/code/data workflows.", "tags": ["engineer","pm"] },
+        { "text": "Designed & deployed hybrid RAG (FAISS→Pinecone), re-ranking, metadata filters, Redis caching; FastAPI service; MLflow evals (hit@k, MRR, faithfulness) with citation-grounded answers.", "tags": ["engineer"] },
+        { "text": "Collaborated with clinicians; delivered imaging tools that supported securing $800K funding.", "tags": ["recruiter","pm"] }
       ]
     },
     {
@@ -46,12 +46,12 @@
       "role": "Image Solutions Intern",
       "date_range": "Aug 2023 — Apr 2024",
       "location": "Bengaluru, India",
-      "stack": ["Python", "PyTorch/TensorFlow", "OpenCV", "SSD-MobileNet", "Quantization", "Pruning", "On-device deployment"],
+      "stack": ["PyTorch/TensorFlow", "OpenCV", "SSD-MobileNet", "Quantization", "Pruning", "On-device Deployment"],
       "highlights": [
-        { "text": "Trained SSD-MobileNet to detect HDR ghost artifacts; reached 93% detection accuracy on internal validation.", "tags": ["engineer","recruiter"] },
-        { "text": "Built large-scale HDR ghosting dataset with labeling guidelines and QA checks, improving robustness across scenes.", "tags": ["engineer"] },
-        { "text": "Implemented quantization and pruning for on-device deployment, +25% inference speed and −40% model size.", "tags": ["engineer","recruiter"] },
-        { "text": "Shipped the model in the camera imaging pipeline; used on millions of Samsung phones.", "tags": ["recruiter"] }
+        { "text": "Trained SSD-MobileNet to detect HDR ghost artifacts with 93% validation accuracy.", "tags": ["engineer","recruiter"] },
+        { "text": "Curated large-scale HDR ghosting dataset; defined labeling guidelines and QA to improve robustness.", "tags": ["engineer"] },
+        { "text": "Quantization/pruning for device: +25% inference speed, −40% model size.", "tags": ["engineer","recruiter"] },
+        { "text": "Shipped into camera pipeline; used on millions of Samsung phones.", "tags": ["recruiter"] }
       ]
     },
     {
@@ -59,45 +59,37 @@
       "role": "Artificial Intelligence Intern",
       "date_range": "May 2022 — May 2023",
       "location": "Remote",
-      "stack": ["Python", "OpenCV", "DEEP SORT", "GAN", "RNN/LSTM", "Realtime CV", "Data Pipelines"],
+      "stack": ["Python", "OpenCV", "DEEP SORT", "GAN", "RNN/LSTM"],
       "highlights": [
-        { "text": "Designed real-time computer vision system for automated parking; 96.8% detection accuracy and scaled to 100K images/day.", "tags": ["engineer","recruiter"] },
-        { "text": "Built GAN + RNN/LSTM pedestrian traffic model with DEEP SORT; preprocessing boosted accuracy by 15%.", "tags": ["engineer"] },
-        { "text": "Presented system to client stakeholders; showcased impact on reducing energy costs via pedestrian-based power optimization.", "tags": ["pm","recruiter"] }
+        { "text": "Realtime CV system for automated parking: 96.8% detection accuracy; scaled to 100K images/day.", "tags": ["engineer","recruiter"] },
+        { "text": "GAN + RNN/LSTM pedestrian traffic model; preprocessing boosted accuracy by 15%.", "tags": ["engineer"] },
+        { "text": "Presented to stakeholders; reduced energy costs via pedestrian-based power optimization.", "tags": ["pm","recruiter"] }
       ]
     }
   ],
-
   "projects": [
     {
       "name": "GAN-based Synthetic MRI Generation",
       "description": "End-to-end GAN pipeline with U-Net/CNN priors to expand MRI dataset diversity.",
-      "tags": ["GAN", "U-Net", "PyTorch", "Docker", "AWS SageMaker", "MLflow"],
+      "tags": ["GAN", "U-Net", "PyTorch", "SageMaker", "Docker", "MLflow"],
       "metrics": ["FID = 15.2"],
       "highlights": [
-        { "text": "Containerized training/inference; tracked experiments with MLflow.", "tags": ["engineer"] }
+        { "text": "Containerized training/inference with experiment tracking.", "tags": ["engineer"] }
       ]
     },
     {
-      "name": "Transformer-based Text Classification",
-      "description": "Fine-tuned BERT on IMDb sentiment with PyTorch + Hugging Face.",
+      "name": "Transformer-based Text Classification (NLP)",
+      "description": "Fine-tuned BERT on IMDb sentiment.",
       "tags": ["BERT", "Transformers", "PyTorch", "HuggingFace", "scikit-learn"],
-      "metrics": ["Accuracy = 94.2%"],
-      "highlights": [
-        { "text": "Built clean training/eval pipeline and reproducible seeds.", "tags": ["engineer"] }
-      ]
+      "metrics": ["Accuracy = 94.2%"]
     },
     {
       "name": "LLM Agents & Retrieval-Augmented Generation (RAG)",
-      "description": "Agents with tool orchestration (MCP) over a hybrid RAG stack (FAISS/Pinecone, dense+BM25, re-ranking).",
+      "description": "Agents with tools (MCP) over hybrid RAG (FAISS/Pinecone, dense+BM25, re-ranking).",
       "tags": ["LangChain", "MCP", "FAISS", "Pinecone", "BM25", "E5", "BGE/Cross-Encoder", "LoRA"],
-      "metrics": ["−22% retrieval latency", "+15% answer accuracy"],
-      "highlights": [
-        { "text": "LoRA-tuned open-source LLMs for efficient domain adaptation.", "tags": ["engineer"] }
-      ]
+      "metrics": ["−22% retrieval latency", "+15% answer accuracy"]
     }
   ],
-
   "skills": {
     "Languages": ["Python", "C++", "Java", "SQL", "Bash"],
     "ML/DL": ["PyTorch", "TensorFlow", "Keras", "scikit-learn"],
@@ -108,38 +100,22 @@
     "MLOps/Infra": ["Docker", "AWS (S3/EC2/SageMaker)", "MLflow", "Linux", "Git", "FastAPI/Flask", "Kubernetes (intro)"],
     "Optimization": ["Quantization", "Pruning", "Compression", "Edge deployment"]
   },
-
   "education": [
     {
       "school": "State University of New York at Buffalo",
       "degree": "M.S. in Computer Science (AI/ML)",
       "date_range": "Aug 2024 — Present",
-      "details": "GPA: 3.96/4.00",
-      "location": "Buffalo, NY"
+      "location": "Buffalo, NY",
+      "details": "GPA: 3.96/4.00"
     },
     {
       "school": "Vellore Institute of Technology",
       "degree": "B.Tech in Computer Science (Data Science)",
       "date_range": "Jul 2020 — Jun 2024",
-      "details": "GPA: 3.52/4.00",
-      "location": "Vellore, India"
-    }
-    ]
-
-  ,
-  "talks": [
-    {
-      "title": "Spatial-resolution metrics for self-collimation SPECT (DL projection modeling; ML regression/clustering on Monte Carlo data)",
-      "event": "SNMMI 2025",
-      "year": 2025
-    },
-    {
-      "title": "Spatial-resolution metrics for self-collimation SPECT",
-      "event": "IEEE NSS/MIC/RTSD 2025 (accepted)",
-      "year": 2025
+      "location": "Vellore, India",
+      "details": "GPA: 3.52/4.00"
     }
   ],
-
   "publications": [
     {
       "venue": "SNMMI",
@@ -166,43 +142,11 @@
       "title": "Spatial-resolution metrics for tomography"
     }
   ],
-
   "patents": [
     { "title": "Vehicle Lane Acceleration Profiles (VLAP)", "status": "Filed/Under Review" },
     { "title": "Lane-level trajectory sharing", "status": "Filed/Under Review" },
     { "title": "BCS^2 POI discovery", "status": "Filed/Under Review" },
     { "title": "Direction-aware lane matching", "status": "Filed/Under Review" },
     { "title": "Micro-point addressing for last-meter navigation", "status": "Filed/Under Review" }
-  ],
-
-  "story": [
-    {
-      "title": "Lane-level analytics & GenAI guidance",
-      "when": "May–Aug 2025",
-      "context": "HERE Technologies — Research Engineer Intern",
-      "narrative": "Delivered grounded, multimodal GenAI guidance for last-meter navigation using multi-LLM routing and lane/POI retrieval; production-ready cloud pipeline.",
-      "metrics": ["+12% route prediction accuracy", "10K+ daily queries"]
-    },
-    {
-      "title": "SPECT imaging platform & RAG agents",
-      "when": "2024–2025",
-      "context": "SUNY Research Foundation — Research Lead",
-      "narrative": "Hybrid RAG stack with evaluation harness; automated imaging pipelines; collaboration with clinicians led to funded adoption.",
-      "metrics": ["+18% spatial resolution", "−30% analysis time", "−20% reconstruction time", "$800K funding"]
-    },
-    {
-      "title": "HDR ghost artifact detection at scale",
-      "when": "2023–2024",
-      "context": "Samsung R&D — Image Solutions Intern",
-      "narrative": "Productionized on-device model with quantization/pruning; dataset creation and QA improved robustness across diverse scenes.",
-      "metrics": ["93% detection accuracy", "25% faster inference", "40% smaller model", "Millions of devices"]
-    },
-    {
-      "title": "Automated parking CV system",
-      "when": "2022–2023",
-      "context": "Point Zero Solutions — AI Intern",
-      "narrative": "Realtime detection and pedestrian flow modeling driving operational impact for client energy optimization.",
-      "metrics": ["96.8% detection accuracy", "100K images/day", "+15% model accuracy"]
-    }
   ]
 }
